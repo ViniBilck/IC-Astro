@@ -1,4 +1,5 @@
 import numpy as np
+import argparse
 
 def radial_rand(h, z_0, m, n):
 	'''
@@ -42,4 +43,17 @@ def galaxia(h1, h2, z01, z02, m, n):
 		data.append([x[_], y[_], z[_]])
 		data_ana.append([z[_], p[_]])
 	return np.array(data, dtype=np.float32), np.array(data_ana, dtype=np.float32)
+
+def Main():
+	parser = argparse.ArgumentParser()
+	parser.add_argument("-h_D", help="comprimento da escala exponencial do disco", type = float )
+	parser.add_argument("-z_D", help="espessura da escala vertical do disco", type = float )
+	parser.add_argument("-m_D", help="Massa total do disco", type = float )
+	parser.add_argument("-n_D", help="Número de particulas geradas", type = int )
+	parser.add_argument("-G", "--Galaxia", help="Gerador de galaxia", action = "store_true")
+	args = parser.parse_args()
+	if args.Galaxia:
+		print(galaxia(args.h_D, args.h_D, args.z_D, args.z_D, args.m_D, args.n_D))
+if __name__ == "__main__":
+	Main()
 
