@@ -1,5 +1,20 @@
 import numpy as np
+import matplotlib.pyplot as plt 
 import argparse
+
+plt.style.use('seaborn-bright')
+plt.rcParams['font.family'] = 'serif'
+plt.rcParams['mathtext.fontset'] = 'stix'
+plt.rcParams['axes.labelsize'] = 14
+plt.rcParams['axes.linewidth'] = 1.5
+plt.rcParams['xtick.labelsize'] = 14
+plt.rcParams['ytick.labelsize'] = 14
+plt.rcParams['legend.fontsize'] = 14
+plt.rcParams['figure.figsize'] = (16, 8)
+plt.rcParams['lines.linewidth'] = 2
+plt.rcParams["savefig.dpi"] = 400
+
+
 
 def radial_rand(h, z_0, m, n):
 	'''
@@ -53,7 +68,36 @@ def Main():
 	parser.add_argument("-G", "--Galaxia", help="Gerador de galaxia", action = "store_true")
 	args = parser.parse_args()
 	if args.Galaxia:
-		print(galaxia(args.h_D, args.h_D, args.z_D, args.z_D, args.m_D, args.n_D))
+		gal, p_z =  galaxia(args.h_D, args.h_D, args.z_D, args.z_D, args.m_D, args.n_D)
+		print(gal)
+		
+		vet_x, vet_y, vet_z = gal[:,[0]].flatten(), gal[:,[1]].flatten(), gal[:,[2]].flatten()
+		f, (ax1, ax2) = plt.subplots(nrows=1, ncols=2)
+		
+		
+		## 1
+		ax1.plot(vet_x, vet_y, 'o', markersize = 1, c = '#f72585')
+		ax1.set_title("XY View")
+		ax1.set_xlabel("kpc/h")
+		ax1.set_ylabel("kpc/h")
+		ax1.set_xlim(-50, 50)
+		ax1.set_ylim(-50, 50)
+		ax1.grid()
+
+		## 2
+		ax2.plot(vet_y, vet_z, 'o', markersize = 1, c = '#3a0ca3')
+		ax2.set_title("YZ View")
+		ax2.set_xlabel("kpc/h")
+		ax2.set_ylabel("kpc/h")
+		ax2.set_xlim(-50, 50)
+		ax2.set_ylim(-50, 50)
+		ax2.grid()
+		
+
+		plt.show()
+
+
+
 if __name__ == "__main__":
 	Main()
 
