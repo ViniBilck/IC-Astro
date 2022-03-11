@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt 
 import argparse
+import configparser
 
 plt.style.use('seaborn-bright')
 plt.rcParams['font.family'] = 'serif'
@@ -59,6 +60,29 @@ def galaxia(h1, h2, z01, z02, m, n):
 		data_ana.append([z[_], p[_]])
 	return np.array(data, dtype=np.float32), np.array(data_ana, dtype=np.float32)
 
+def plot_coord(vet_x, vet_y, vet_z):
+	f, (ax1, ax2) = plt.subplots(nrows=1, ncols=2)
+		
+	## 1
+	ax1.plot(vet_x, vet_y, 'o', markersize = 1, c = '#f72585')
+	ax1.set_title("XY View")
+	ax1.set_xlabel("kpc/h")
+	ax1.set_ylabel("kpc/h")
+	ax1.set_xlim(-50, 50)
+	ax1.set_ylim(-50, 50)
+	ax1.grid()
+
+	## 2
+	ax2.plot(vet_y, vet_z, 'o', markersize = 1, c = '#3a0ca3')
+	ax2.set_title("YZ View")
+	ax2.set_xlabel("kpc/h")
+	ax2.set_ylabel("kpc/h")
+	ax2.set_xlim(-50, 50)
+	ax2.set_ylim(-50, 50)
+	ax2.grid()
+	plt.show()
+
+
 def Main():
 	parser = argparse.ArgumentParser()
 	parser.add_argument("-h_D", help="comprimento da escala exponencial do disco", type = float )
@@ -72,30 +96,8 @@ def Main():
 		print(gal)
 		
 		vet_x, vet_y, vet_z = gal[:,[0]].flatten(), gal[:,[1]].flatten(), gal[:,[2]].flatten()
-		f, (ax1, ax2) = plt.subplots(nrows=1, ncols=2)
 		
-		
-		## 1
-		ax1.plot(vet_x, vet_y, 'o', markersize = 1, c = '#f72585')
-		ax1.set_title("XY View")
-		ax1.set_xlabel("kpc/h")
-		ax1.set_ylabel("kpc/h")
-		ax1.set_xlim(-50, 50)
-		ax1.set_ylim(-50, 50)
-		ax1.grid()
-
-		## 2
-		ax2.plot(vet_y, vet_z, 'o', markersize = 1, c = '#3a0ca3')
-		ax2.set_title("YZ View")
-		ax2.set_xlabel("kpc/h")
-		ax2.set_ylabel("kpc/h")
-		ax2.set_xlim(-50, 50)
-		ax2.set_ylim(-50, 50)
-		ax2.grid()
-		
-
-		plt.show()
-
+		plot_coord(vet_x, vet_y, vet_z)
 
 
 if __name__ == "__main__":
