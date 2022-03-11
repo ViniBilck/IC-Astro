@@ -16,6 +16,6 @@ Onde temos que:
 | z_D | Float | Espessura da escala vertical do disco |
 | m_D | Float | Massa total do disco |
 | n_D | Int | Número de particulas geradas |
-
+| G | Boolean | Acessa a função de gerar as coordenadas e o Plot |
 ### Output 
 O código no momento somente retorna uma lista de coordenadas x, y, z, aleatórias que seguem  (Ou deveriam seguir) o perfil de densidade do disco de uma galáxia.
