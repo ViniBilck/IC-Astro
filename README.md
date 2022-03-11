@@ -6,13 +6,13 @@ Compilado de códigos utilizados na IC
 Para rodar o Gerador de coordenadas, rode no terminal.
 
 ```powershell
-python3 Gerador.py -h 1 -z 2 -m 1 -n 10000 -G  
+python3 Gerador.py -ho 1 -z 2 -m 1 -n 10000 -G  
 ```
 Onde temos que:
 
 |  Prefixo | Type | Comentário |
 | --- | --- | --- | 
-| h | Float | Comprimento da escala exponencial do disco |
+| ho | Float | Comprimento da escala exponencial do disco |
 | z | Float | Espessura da escala vertical do disco |
 | m | Float | Massa total do disco |
 | n | Int | Número de particulas geradas |
