@@ -84,14 +84,14 @@ def plot_coord(vet_x: list, vet_y: list, vet_z: list):
 
 def main():
 	parser = argparse.ArgumentParser()
-	parser.add_argument("-h", help="Comprimento da escala exponencial do disco", type = float )
+	parser.add_argument("-ho", help="Comprimento da escala exponencial do disco", type = float )
 	parser.add_argument("-z", help="Espessura da escala vertical do disco", type = float )
 	parser.add_argument("-m", help="Massa total do disco", type = float )
 	parser.add_argument("-n", help="Número de particulas geradas", type = int )
 	parser.add_argument("-G", "--Galaxia", help="Gerador de galaxia", action = "store_true")
 	args = parser.parse_args()
 	if args.Galaxia:
-		gal, p_z =  galaxia(args.h, args.h, args.z, args.z, args.m, args.n)
+		gal, p_z =  galaxia(args.h0, args.h, args.z, args.z, args.m, args.n)
 		print(gal)
 		
 		vet_x, vet_y, vet_z = gal[:,[0]].flatten(), gal[:,[1]].flatten(), gal[:,[2]].flatten()
