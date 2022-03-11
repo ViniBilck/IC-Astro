@@ -1,7 +1,7 @@
 # Iniciação Científica
-Compilado de códigos utilizados na IC, para aprender como gerar galáxias para utilizar nas simulações com Gadget-4
+Compilado de códigos utilizados na IC
 
-# Utilizar Gerador
+### Utilizar Gerador
 
 Para rodar o Gerador de coordenadas, rode no terminal.
 
