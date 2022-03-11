@@ -82,7 +82,7 @@ def plot_coord(vet_x: list, vet_y: list, vet_z: list):
 	plt.show()
 
 
-def Main():
+def main():
 	parser = argparse.ArgumentParser()
 	parser.add_argument("-h_D", help="comprimento da escala exponencial do disco", type = float )
 	parser.add_argument("-z_D", help="espessura da escala vertical do disco", type = float )
@@ -100,5 +100,5 @@ def Main():
 
 
 if __name__ == "__main__":
-	Main()
+	main()
 
