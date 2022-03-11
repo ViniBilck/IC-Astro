@@ -17,7 +17,7 @@ plt.rcParams["savefig.dpi"] = 400
 
 
 
-def radial_rand(h, z_0, m, n):
+def radial_rand(h: float, z_0: float, m: float, n: int):
 	'''
 	Retorna um vetor de números aleatorios para raio da galaxia
 	'''
@@ -27,23 +27,22 @@ def radial_rand(h, z_0, m, n):
 	
 	return ret
 
-def high_rand(h, z_0, m, n):
+def high_rand(h: float, z_0: float, m: float, n: int):
 	'''
 	Retorna um vetor de números aleatorios para expessura da galaxia
 	'''
 	dominio = m/(4*np.pi*h**2)
 	z = np.random.uniform(-dominio,dominio,n)
 	a_const = (4*np.pi*h**2)/m
-	## ret = z_0 * np.arctanh(a_const*z)
 	t = z*a_const
-	lo = np.log((1+t)/(1-t))
+	lo = np.log((1 + t)/(1 - t))
 
-	retu = z_0 * (1/2) * lo
+	retu = z_0*(1/2)*lo
 
 	return retu
 
 
-def galaxia(h1, h2, z01, z02, m, n):
+def galaxia(h1: float, h2: float, z01: float, z02: float, m: float, n: int):
 	
 	z = high_rand(h1, z01, m, n)
 	p = radial_rand(h2, z02, m, n)
@@ -60,7 +59,7 @@ def galaxia(h1, h2, z01, z02, m, n):
 		data_ana.append([z[_], p[_]])
 	return np.array(data, dtype=np.float32), np.array(data_ana, dtype=np.float32)
 
-def plot_coord(vet_x, vet_y, vet_z):
+def plot_coord(vet_x: list, vet_y: list, vet_z: list):
 	f, (ax1, ax2) = plt.subplots(nrows=1, ncols=2)
 		
 	## 1
