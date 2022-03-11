@@ -1,7 +1,7 @@
 # Iniciação Científica
 Compilado de códigos utilizados na IC
 
-### Utilizar Gerador
+## Utilizar Gerador
 
 Para rodar o Gerador de coordenadas, rode no terminal.
 
