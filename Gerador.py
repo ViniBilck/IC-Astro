@@ -91,7 +91,7 @@ def main():
 	parser.add_argument("-G", "--Galaxia", help="Gerador de galaxia", action = "store_true")
 	args = parser.parse_args()
 	if args.Galaxia:
-		gal, p_z =  galaxia(args.h0, args.h, args.z, args.z, args.m, args.n)
+		gal, p_z =  galaxia(args.ho, args.ho, args.z, args.z, args.m, args.n)
 		print(gal)
 		
 		vet_x, vet_y, vet_z = gal[:,[0]].flatten(), gal[:,[1]].flatten(), gal[:,[2]].flatten()
