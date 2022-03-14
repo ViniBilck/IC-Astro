@@ -48,10 +48,10 @@ def galaxia(h1: float, h2: float, z01: float, z02: float, m: float, n: int):
 	z = high_rand(h1, z01, m, n)
 	p = radial_rand(h2, z02, m, n)
 	
-	r = np.sqrt((z**2) + (p**2))
+	## r = np.sqrt((z**2) + (p**2))
 	th = 2*np.pi*np.random.random(n)
-	x = r*np.sin(th)
-	y = r*np.cos(th)
+	x = p*np.sin(th)
+	y = p*np.cos(th)
 
 	data = []
 	data_ana = []
