@@ -19,9 +19,23 @@ plt.rcParams["savefig.dpi"] = 400
 
 
 def radial_rand(h: float, z_0: float, m: float, n: int):
-	'''
-	Retorna um vetor de números aleatorios para raio da galaxia
-	'''
+	"""
+    Gera um valor aleatorio para a parte radial da galaxia, seguindo o perfil de densidade do disco.
+    Parametros
+    ----------
+    h : float
+        Comprimento da escala exponencial do disco
+    z_0 : float
+        Espessura da escala vertical do disco
+	m : float
+        Massa total do disco
+    n : int
+        Número de particulas geradas
+	Returns
+    -------
+    ret : Array
+        Lista de números aleatorios que correspondem a trecho radial da galaxia.
+    """
 	a_const = (-4*np.pi*h*z_0)/m
 	num_r = -h*np.log(a_const * np.random.uniform(-1,0,n) + 1)
 	ret =  num_r + min(num_r)*-1
@@ -29,9 +43,23 @@ def radial_rand(h: float, z_0: float, m: float, n: int):
 	return ret
 
 def high_rand(h: float, z_0: float, m: float, n: int):
-	'''
-	Retorna um vetor de números aleatorios para expessura da galaxia
-	'''
+	"""
+    Gera um valor aleatorio para a expessura da galaxia, seguindo o perfil de densidade do disco.
+    Parametros
+    ----------
+    h : float
+        Comprimento da escala exponencial do disco
+    z_0 : float
+        Espessura da escala vertical do disco
+	m : float
+        Massa total do disco
+    n : int
+        Número de particulas geradas
+	Returns
+    -------
+    retu : Array
+        Lista de números aleatorios que correspondem a expessura vertical da galaxia.
+    """
 	dominio = m/(4*np.pi*h**2)
 	z = np.random.uniform(-dominio,dominio,n)
 	a_const = (4*np.pi*h**2)/m
@@ -43,12 +71,28 @@ def high_rand(h: float, z_0: float, m: float, n: int):
 	return retu
 
 
-def galaxia(h1: float, h2: float, z01: float, z02: float, m: float, n: int):
-	
+def galaxia(h1: float, z01: float, m: float, n: int):
+	"""
+    Gera coordenadas X, Y, Z aleatorias, seguindo o perfil de densidade do disco.
+    Parametros
+    ----------
+    h1 : float
+        Comprimento da escala exponencial do disco
+    z01 : float
+        Espessura da escala vertical do disco
+	m : float
+        Massa total do disco
+    n : int
+        Número de particulas geradas
+	Returns
+    -------
+    return : np.array, np.array
+        Duas matrizes que correspondem, coordenadas X, Y, Z da galaxia, 
+		e os valores de Rho e Z, do perfil de densidade do disco.
+    """	
 	z = high_rand(h1, z01, m, n)
-	p = radial_rand(h2, z02, m, n)
-	
-	## r = np.sqrt((z**2) + (p**2))
+	p = radial_rand(h1, z01, m, n)
+
 	th = 2*np.pi*np.random.random(n)
 	x = p*np.sin(th)
 	y = p*np.cos(th)
@@ -61,6 +105,22 @@ def galaxia(h1: float, h2: float, z01: float, z02: float, m: float, n: int):
 	return np.array(data, dtype=np.float32), np.array(data_ana, dtype=np.float32)
 
 def plot_coord(vet_x: list, vet_y: list, vet_z: list):
+	"""
+    Grafica os planos XY e YZ. Vetores precisam ter o mesmo comprimento
+    Parametros
+    ----------
+    vet_x : list
+    	Lista com os valores do eixo X
+    vet_y : list
+    	Lista com os valores do eixo Y
+    vet_z : list
+    	Lista com os valores do eixo Z
+	Returns
+    -------
+    return : PyPlot
+        Plot de XY e YZ
+    """
+
 	f, (ax1, ax2) = plt.subplots(nrows=1, ncols=2)
 		
 	## 1
