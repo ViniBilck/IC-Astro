@@ -24,7 +24,7 @@ Onde temos que:
 | G | Boolean | Acessa a função de gerar as coordenadas e o Plot |
 ### Output 
 O código no momento somente retorna uma lista de coordenadas x, y, z, aleatórias que seguem  (Ou deveriam seguir) o perfil de densidade do disco de uma galáxia.
-Utilizando h0 = 10, z = 0.3, m = 1, n = 40000
+Utilizando ```h0 = 10, z = 0.3, m = 1, n = 40000```
 
 
 <img src='https://github.com/ViniBilck/IC-Astro/blob/main/IMG/Example.png'></img>
