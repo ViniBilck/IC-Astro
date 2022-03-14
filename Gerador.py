@@ -91,7 +91,7 @@ def main():
 	parser.add_argument("-n", help="Número de particulas geradas", type = int )
 	parser.add_argument("-G", "--Galaxia", help="Gerador de galaxia", action = "store_true")
 	parser.add_argument("-CG", "--Config_Galaxia", help="Gerador de galaxia com arquivo config.ini", action = "store_true")
-	parser.add_argument ("-c", "--config", help ="" dest='config_file', default='config.ini', type=str)
+	parser.add_argument ("-c", "--config", help ="", dest='config_file', default='config.ini', type=str)
 	
 	args = parser.parse_args()
 	here = os.path.realpath('.')
