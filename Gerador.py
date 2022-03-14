@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import matplotlib.pyplot as plt 
 import argparse
@@ -89,9 +90,30 @@ def main():
 	parser.add_argument("-m", help="Massa total do disco", type = float )
 	parser.add_argument("-n", help="Número de particulas geradas", type = int )
 	parser.add_argument("-G", "--Galaxia", help="Gerador de galaxia", action = "store_true")
+	parser.add_argument("-CG", "--Config_Galaxia", help="Gerador de galaxia com arquivo config.ini", action = "store_true")
+	parser.add_argument ("-c", "--config", help ="" dest='config_file', default='config.ini', type=str)
+	
 	args = parser.parse_args()
+	here = os.path.realpath('.')
+	config_file = args.config_file
+	config = configparser.ConfigParser(defaults = {'here': here})
+	config.read(args.config_file)
+	
 	if args.Galaxia:
 		gal, p_z =  galaxia(args.ho, args.ho, args.z, args.z, args.m, args.n)
+		print(gal)
+		
+		vet_x, vet_y, vet_z = gal[:,[0]].flatten(), gal[:,[1]].flatten(), gal[:,[2]].flatten()
+		
+		plot_coord(vet_x, vet_y, vet_z)
+
+	if args.Config_Galaxia:
+		ho = float(config.get("param", "ho"))
+		z = float(config.get("param", "z"))
+		m = float(config.get("param", "m"))
+		n = int(config.get("param", "n"))
+
+		gal, p_z =  galaxia(ho, ho, z, z, m, n)
 		print(gal)
 		
 		vet_x, vet_y, vet_z = gal[:,[0]].flatten(), gal[:,[1]].flatten(), gal[:,[2]].flatten()
