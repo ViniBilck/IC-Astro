@@ -27,4 +27,4 @@ O código no momento somente retorna uma lista de coordenadas x, y, z, aleatóri
 Utilizando ```ho = 10, z = 0.3, m = 1, n = 40000```
 
 
-<img src='https://github.com/ViniBilck/IC-Astro/blob/main/IMG/Example.png'></img>
+<img src='https://raw.githubusercontent.com/ViniBilck/IC-Astro/main/IMG/example.png'></img>
