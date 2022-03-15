@@ -5,6 +5,7 @@ import argparse
 import configparser
 
 plt.style.use('seaborn-bright')
+plt.style.use('dark_background')
 plt.rcParams['font.family'] = 'serif'
 plt.rcParams['mathtext.fontset'] = 'stix'
 plt.rcParams['axes.labelsize'] = 14
@@ -124,7 +125,7 @@ def plot_coord(vet_x: list, vet_y: list, vet_z: list):
 	f, (ax1, ax2) = plt.subplots(nrows=1, ncols=2)
 		
 	## 1
-	ax1.plot(vet_x, vet_y, 'o', markersize = 1, c = '#f72585')
+	ax1.plot(vet_x, vet_y, 'o', markersize = 1)
 	ax1.set_title("XY View")
 	ax1.set_xlabel("kpc/h")
 	ax1.set_ylabel("kpc/h")
@@ -133,7 +134,7 @@ def plot_coord(vet_x: list, vet_y: list, vet_z: list):
 	ax1.grid()
 
 	## 2
-	ax2.plot(vet_y, vet_z, 'o', markersize = 1, c = '#3a0ca3')
+	ax2.plot(vet_y, vet_z, 'o', markersize = 1)
 	ax2.set_title("YZ View")
 	ax2.set_xlabel("kpc/h")
 	ax2.set_ylabel("kpc/h")
@@ -173,7 +174,7 @@ def main():
 		m = float(config.get("param", "m"))
 		n = int(config.get("param", "n"))
 
-		gal, p_z =  galaxia(ho, ho, z, z, m, n)
+		gal, p_z =  galaxia(ho, z, m, n)
 		print(gal)
 		
 		vet_x, vet_y, vet_z = gal[:,[0]].flatten(), gal[:,[1]].flatten(), gal[:,[2]].flatten()
