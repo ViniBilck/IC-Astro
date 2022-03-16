@@ -169,6 +169,13 @@ def main():
 		vet_x, vet_y, vet_z = gal[:,[0]].flatten(), gal[:,[1]].flatten(), gal[:,[2]].flatten()
 		
 		plot_coord(vet_x, vet_y, vet_z)
+		
+		if args.save:
+			data = tables.open_file("Data/Coord_Data.hdf5", mode = "w")
+			atom = tables.Atom.from_dtype(gal.dtype)
+			d = data.create_carray(data.root, "Coordinates", atom, gal.shape)
+			d[:] = gal
+			data.close()		
 
 	if args.Config_Galaxia:
 		ho = float(config.get("param", "ho"))
