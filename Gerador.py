@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt 
 import argparse
 import configparser
+import tables
 
 plt.style.use('seaborn-bright')
 plt.style.use('dark_background')
@@ -152,6 +153,7 @@ def main():
 	parser.add_argument("-n", help="Número de particulas geradas", type = int )
 	parser.add_argument("-G", "--Galaxia", help="Gerador de galaxia", action = "store_true")
 	parser.add_argument("-CG", "--Config_Galaxia", help="Gerador de galaxia com arquivo config.ini", action = "store_true")
+	parser.add_argument("-s", "--save", help="Salva as coordenadas em HDF5", action = "store_true")
 	parser.add_argument ("-c", "--config", help ="", dest='config_file', default='config.ini', type=str)
 	
 	args = parser.parse_args()
@@ -181,7 +183,15 @@ def main():
 		
 		plot_coord(vet_x, vet_y, vet_z)
 
+		if args.save:
+			data = tables.open_file("Data/Coord_Data.hdf5", mode = "w")
+			atom = tables.Atom.from_dtype(gal.dtype)
+			d = data.create_carray(data.root, "Coordinates", atom, gal.shape)
+			d[:] = gal
+			data.close()
+
 
 if __name__ == "__main__":
 	main()
+	
 
