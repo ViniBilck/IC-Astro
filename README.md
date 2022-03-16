@@ -6,7 +6,7 @@ Compilado de códigos utilizados na IC
 Para rodar o Gerador de coordenadas, rode no terminal.
 
 ```powershell
-python3 Gerador.py -ho 1 -z 2 -m 1 -n 10000 -G  
+python3 Gerador.py -ho 10 -z 0.3 -m 1 -n 10000 -G  
 ```
 ou
 
