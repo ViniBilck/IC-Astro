@@ -106,6 +106,7 @@ def galaxia(h1: float, z01: float, m: float, n: int):
 		data_ana.append([z[_], p[_]])
 	return np.array(data, dtype=np.float32), np.array(data_ana, dtype=np.float32)
 
+
 def plot_coord(vet_x: list, vet_y: list, vet_z: list):
 	"""
     Grafica os planos XY e YZ. Vetores precisam ter o mesmo comprimento
