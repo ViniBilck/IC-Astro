@@ -1,3 +1,6 @@
+import numpy as np
+
+
 def velocity_vector(data):
 	r_coord = [np.sqrt(data[_][0]**2 + data[_][1]**2 + data[_][2]**2) for _ in range(len(data))]
 	mass = [np.sum((r_coord < r_coord[_])) for _ in range(len(r_coord))]
