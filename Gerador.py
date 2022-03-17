@@ -106,6 +106,13 @@ def galaxia(h1: float, z01: float, m: float, n: int):
 		data_ana.append([z[_], p[_]])
 	return np.array(data, dtype=np.float32), np.array(data_ana, dtype=np.float32)
 
+def velocity_vector(data):
+	r_coord = [np.sqrt(data[_][0]**2 + data[_][1]**2 + data[_][2]**2) for _ in range(len(data))]
+	mass = [np.sum((r_coord < r_coord[_])) for _ in range(len(r_coord))]
+	g_const = 1
+	v_mod = [np.sqrt((g_const*mass[_])/r_coord[_]) for _ in range(len(r_coord))]
+	
+	return
 
 def plot_coord(vet_x: list, vet_y: list, vet_z: list):
 	"""
