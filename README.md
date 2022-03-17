@@ -21,6 +21,7 @@ Onde temos que:
 | z | Float | Espessura da escala vertical do disco |
 | m | Float | Massa total do disco |
 | n | Int | Número de particulas geradas |
+| c | Boolean | Permite o arquivo config.ini |
 | s | Boolean | Acessa a função para salvar as coordenadas em HDF5 |
 | CG | Boolean | Acessa a função de gerar as coordenadas e o Plot utilizando um arquivo config.ini |
 | G | Boolean | Acessa a função de gerar as coordenadas e o Plot |
