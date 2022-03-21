@@ -105,6 +105,19 @@ def galaxia(h1: float, z01: float, m: float, n: int):
 	return np.array(data, dtype=np.float32), np.array(data_ana, dtype=np.float32)
 
 
+
+def bulge_vet(M, a, n):
+	x_r = np.random.uniform(0,1,n)
+	r_rand = a*np.sqrt(x_r/M)/(1 - np.sqrt(x_r/M))
+	return r_rand
+
+
+
+def bulge_coord():
+	
+	return
+
+
 def plot_coord(vet_x: list, vet_y: list, vet_z: list):
 	"""
     Grafica os planos XY e YZ. Vetores precisam ter o mesmo comprimento

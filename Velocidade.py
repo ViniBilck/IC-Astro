@@ -21,7 +21,7 @@ def velocity_vector(data, v_module):
         v_un /= np.linalg.norm(v_un)
         v_normais_plan.append(v_un)
 
-    v_velo = [np.cross(data[_]/np.linalg.norm(data[_]),v_normais_plan[_]) for _ in range(len(data))]
+    v_velo = [np.cross(v_normais_plan[_], data[_]/np.linalg.norm(data[_])) for _ in range(len(data))]
     ret = []
     for _ in range(len(v_velo)):
         ret.append([v_module[_]*v_velo[_][0], v_module[_]*v_velo[_][1], v_module[_]*v_velo[_][2]])
