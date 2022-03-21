@@ -24,6 +24,8 @@ def main():
 	config = configparser.ConfigParser(defaults = {'here': here})
 	config.read(args.config_file)
 	
+
+	
 	if args.Galaxia:
 		gal, p_z =  cd.galaxia(args.ho, args.z, args.m, args.n)
 		print(gal)
