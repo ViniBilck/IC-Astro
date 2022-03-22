@@ -113,9 +113,27 @@ def bulge_vet(M, a, n):
 
 
 
-def bulge_coord():
+def coord_esf(R, n):
+	data = []
+	for _ in range(n):
+		theta = np.arccos(1-2*np.random.random())
+		phi = np.random.random() * 2 * np.pi
+		raio = R*np.sqrt(np.random.random())
+		
+		data.append([raio*np.cos(phi)*np.sin(theta), raio*np.sin(phi)*np.sin(theta), raio*np.cos(theta)])
+	data2 = np.array(data, dtype=np.float32)
+	return data2
+
+
+
+def bulge_coord(M, a, n):
+	r_coord = bulge_vet(M, a, n)
+	data = []
+	for _ in range(len(r_coord)):
+		x = coord_esf(r_coord[_], 1).tolist()[0]
+		data.append(x)
 	
-	return
+	return np.array(data, dtype=np.float32)
 
 
 def plot_coord(vet_x: list, vet_y: list, vet_z: list):
