@@ -6,7 +6,6 @@ def velocity_module(data):
     mass = [np.sum((r_coord_mod < r_coord_mod[_])) for _ in range(len(r_coord_mod))]
     g_const = 1
     v_mod = [np.sqrt((g_const*mass[_])/r_coord_mod[_]) for _ in range(len(r_coord_mod))]
-	
     return v_mod
 
 def velocity_vector(data, v_module):
