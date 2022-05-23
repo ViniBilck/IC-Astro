@@ -18,7 +18,7 @@ Onde temos que:
 
 ### Output 
 O código no momento somente retorna uma lista de coordenadas x, y, z, aleatórias que seguem  (Ou deveriam seguir) o perfil de densidade do disco de uma galáxia.
-Utilizando ```ho = 10, z = 0.3, m = 1, n = 40000```
+Utilizando ```config.ini```
 
 
 <img src='https://raw.githubusercontent.com/ViniBilck/IC-Astro/main/IMG/example.png'></img>
