@@ -1,7 +1,7 @@
 import os
 import argparse
 import configparser
-import tables
+from tables import *
 import numpy as np
 import Coordenadas as Cd
 
@@ -20,61 +20,74 @@ def main():
 	config = configparser.ConfigParser(defaults={'here': here})
 	config.read(args.config_file)
 
-	if args.Config_Galaxia:
-		## Disk Data
-		ho = float(config.get("disk", "Ho_disk"))
-		z = float(config.get("disk", "Z_disk"))
-		m = float(config.get("disk", "M_disk"))
-		n = int(config.get("disk", "N_disk"))
+	## Disk Data
+	Ho_disk = float(config.get("disk", "Ho_disk"))
+	Z_disk = float(config.get("disk", "Z_disk"))
+	M_disk = float(config.get("disk", "M_disk"))
+	N_disk = int(config.get("disk", "N_disk"))
 
-		## Halo Data
-		cut_halo = float(config.get("halo", "r_cut_halo"))
-		M_halo = float(config.get("halo", "M_halo"))
-		N_halo = int(config.get("halo", "N_halo"))
-		A_halo = float(config.get("halo", "A_halo"))
-		gamma_halo = float(config.get("halo", "gamma_halo"))
+	## Halo Data
+	cut_halo = float(config.get("halo", "r_cut_halo"))
+	M_halo = float(config.get("halo", "M_halo"))
+	N_halo = int(config.get("halo", "N_halo"))
+	A_halo = float(config.get("halo", "A_halo"))
+	gamma_halo = float(config.get("halo", "gamma_halo"))
 
-		## Bulge Data
-		cut_bulge = float(config.get("bulge", "r_cut_bulge"))
-		M_bulge = float(config.get("bulge", "M_bulge"))
-		N_bulge = int(config.get("bulge", "N_bulge"))
-		A_bulge = float(config.get("bulge", "A_bulge"))
-		gamma_bulge = float(config.get("bulge", "gamma_bulge"))
+	## Bulge Data
+	cut_bulge = float(config.get("bulge", "r_cut_bulge"))
+	M_bulge = float(config.get("bulge", "M_bulge"))
+	N_bulge = int(config.get("bulge", "N_bulge"))
+	A_bulge = float(config.get("bulge", "A_bulge"))
+	gamma_bulge = float(config.get("bulge", "gamma_bulge"))
 
-		disk = Cd.set_disk_position(ho, z, m, n)
-		halo = Cd.set_halo_positions(cut_halo, M_halo, A_halo, gamma_halo, N_halo)
-		bulge = Cd.set_bulge_positions(cut_bulge, M_bulge, A_bulge, gamma_bulge, N_bulge)
-		print(disk)
-		print(f"Halo: {halo}")
-		print(f"Bulge: {bulge}")
+	disk = Cd.set_disk_position(Ho_disk, Z_disk, M_disk, N_disk)
+	halo = Cd.set_halo_positions(cut_halo, M_halo, A_halo, gamma_halo, N_halo)
+	bulge = Cd.set_bulge_positions(cut_bulge, M_bulge, A_bulge, gamma_bulge, N_bulge)
+	print(disk)
+	print(f"Halo: {halo}")
+	print(f"Bulge: {bulge}")
 		
-		vet_x_disk, vet_y_disk, vet_z_disk = disk[:, [0]].flatten(), disk[:, [1]].flatten(), disk[:, [2]].flatten()
-		vet_x_bulge, vet_y_bulge, vet_z_bulge = bulge[:, [0]].flatten(), bulge[:, [1]].flatten(), bulge[:, [2]].flatten()
-		vet_x_halo, vet_y_halo, vet_z_halo = halo[:, [0]].flatten(), halo[:, [1]].flatten(), halo[:, [2]].flatten()
+	vet_x_disk, vet_y_disk, vet_z_disk = disk[:, [0]].flatten(), disk[:, [1]].flatten(), disk[:, [2]].flatten()
+	vet_x_bulge, vet_y_bulge, vet_z_bulge = bulge[:, [0]].flatten(), bulge[:, [1]].flatten(), bulge[:, [2]].flatten()
+	vet_x_halo, vet_y_halo, vet_z_halo = halo[:, [0]].flatten(), halo[:, [1]].flatten(), halo[:, [2]].flatten()
 
-		vet_x = np.array([vet_x_disk, vet_x_bulge, vet_x_halo])
-		vet_y = np.array([vet_y_disk, vet_y_bulge, vet_y_halo])
-		vet_z = np.array([vet_z_disk, vet_z_bulge, vet_z_halo])
+	vet_x = np.array([vet_x_disk, vet_x_bulge, vet_x_halo], dtype=np.ndarray)
+	vet_y = np.array([vet_y_disk, vet_y_bulge, vet_y_halo], dtype=np.ndarray)
+	vet_z = np.array([vet_z_disk, vet_z_bulge, vet_z_halo], dtype=np.ndarray)
 
-		Cd.plot_coord(vet_x, vet_y, vet_z)
+	Cd.plot_coord(vet_x, vet_y, vet_z)
 
-		if args.save:
-			data = tables.open_file("Data/Coord_Data.hdf5", mode="w")
-			atom = tables.Atom.from_dtype(disk.dtype)
-			d = data.create_carray(data.root, "Coordinates", atom, disk.shape)
-			d[:] = disk
-			data.close()
-	
-	if args.bulge:
-		a = float(config.get("bulge", "a"))
-		m = float(config.get("bulge", "m"))
-		n = int(config.get("bulge", "n"))
+	if args.save:
+		with open_file("Data/Coord_Data.hdf5", mode="w") as data:
+			data.create_group('/', 'Header')
+			data.root.Header._v_attrs.__delitem__("VERSION")
+			data.root.Header._v_attrs.__delitem__("TITLE")
+			data.root.Header._v_attrs.__delitem__("CLASS")
+			for _ in range(4):
+				data.create_group('/', f'PartType{_}')
+			mass_per_part_disk = M_disk / N_disk
+			mass_per_part_bulge = M_bulge / N_bulge
+			mass_per_part_halo = M_halo / N_halo
+			massTable_Disk = np.full((1,N_disk), mass_per_part_disk, float)
+			massTable_Halo = np.full((1, N_halo), mass_per_part_halo, float)
+			massTable_Bulge = np.full((1, N_bulge), mass_per_part_bulge, float)
 
-		bulge = Cd.bulge_coord(m, a, n)
-		vet_x, vet_y, vet_z = bulge[:, [0]].flatten(), bulge[:, [1]].flatten(), bulge[:, [2]].flatten()
-		
-		Cd.plot_coord(vet_x, vet_y, vet_z)
+			##To_Halo
+			data.create_array(data.root.PartType1, "Coordinates", halo)
+			data.create_array(data.root.PartType1, "Masses", massTable_Halo)
 
+			##To_Disk
+			data.create_array(data.root.PartType2, "Coordinates", disk)
+			data.create_array(data.root.PartType2, "Masses", massTable_Disk)
+
+			##To_Bulge
+			data.create_array(data.root.PartType3, "Coordinates", bulge)
+			data.create_array(data.root.PartType3, "Masses", massTable_Bulge)
+
+
+			data.root.Header._v_attrs.MassTable = np.array([0., 0., 0., 0.])
+			data.root.Header._v_attrs.NumPart_ThisFile = np.array([0, N_halo, N_disk, N_bulge], dtype=np.uint32)
+			data.root.Header._v_attrs.NumPart_Total = np.array([0, N_halo, N_disk, N_bulge], dtype=np.uint64)
 
 if __name__ == "__main__":
 	main()

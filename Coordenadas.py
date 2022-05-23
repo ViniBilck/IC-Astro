@@ -164,16 +164,16 @@ def set_bulge_positions(bulge_cut_r, M_bulge, a_bulge, gamma_bulge, N_bulge):
   coords = np.column_stack((xs, ys, zs))
   return coords
 
-def plot_coord(vet_x: list, vet_y: list, vet_z: list):
+def plot_coord(vet_x, vet_y, vet_z):
     """
     Grafica os planos XY e YZ. Vetores precisam ter o mesmo comprimento
     Parametros
     ----------
-    vet_x : list
+    vet_x : ndarray
     	Lista com os valores do eixo X
-    vet_y : list
+    vet_y : ndarray
     	Lista com os valores do eixo Y
-    vet_z : list
+    vet_z : ndarray
     	Lista com os valores do eixo Z
 	Returns
     -------
