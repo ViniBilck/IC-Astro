@@ -63,7 +63,7 @@ def main():
 			data.root.Header._v_attrs.__delitem__("VERSION")
 			data.root.Header._v_attrs.__delitem__("TITLE")
 			data.root.Header._v_attrs.__delitem__("CLASS")
-			for _ in range(4):
+			for _ in range(5):
 				data.create_group('/', f'PartType{_}')
 			mass_per_part_disk = M_disk / N_disk
 			mass_per_part_bulge = M_bulge / N_bulge

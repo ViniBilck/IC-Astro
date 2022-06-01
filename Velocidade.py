@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def velocity_module(data):
     r_coord_mod = [np.linalg.norm(data[_]) for _ in range(len(data))]
     mass = [np.sum((r_coord_mod < r_coord_mod[_])) for _ in range(len(r_coord_mod))]
