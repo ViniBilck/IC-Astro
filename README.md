@@ -17,7 +17,7 @@ Onde temos que:
 | s | Boolean | Acessa a função para salvar o arquivo de condição inicial em HDF5 |
 
 ### Output 
-O código no momento somente retorna uma lista de coordenadas x, y, z, aleatórias que seguem  (Ou deveriam seguir) o perfil de densidade do disco de uma galáxia.
+O código no momento somente retorna uma lista de coordenadas x, y, z, aleatórias que seguem o perfil de densidade do disco, do bojo e halo de uma galáxia.
 Utilizando ```config.ini```
 
 
