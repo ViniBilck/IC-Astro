@@ -1,5 +1,5 @@
-# Iniciação Científica
-Compilado de códigos utilizados na IC
+# Initial Condition Astro
+Gerador de posições aleatórias de particulas seguindo perfis de densidade de componentes gal
 
 ## Utilizar Gerador
 
